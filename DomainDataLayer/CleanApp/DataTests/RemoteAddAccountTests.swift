@@ -7,29 +7,7 @@
 
 import XCTest
 import Domain
-
-class RemoteAddAccount {
-    
-    // MARK: - Properties
-    private let url: URL
-    private let httpClient: HttpPostClient
-    
-    // MARK: - Initialize
-    init(url: URL, httpClient: HttpPostClient) {
-        self.url = url
-        self.httpClient = httpClient
-    }
-    
-    // MARK: - Public Methods
-    func add(addAccountModel: AddAccountModel) {
-        httpClient.post(to: url, with: addAccountModel.toData())
-    }
-}
-
-// MARK: - HttpPostClient
-protocol HttpPostClient {
-    func post(to url: URL, with data: Data?)
-}
+import Data
 
 class RemoteAddAccountTests: XCTestCase {
     
