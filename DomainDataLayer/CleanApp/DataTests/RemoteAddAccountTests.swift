@@ -25,10 +25,12 @@ class RemoteAddAccount {
     }
 }
 
+// MARK: - HttpPostClient
 protocol HttpPostClient {
     func post(url: URL)
 }
 
+// MARK: - HttpGetClient
 protocol HttpGetClient {
     func get(url: URL)
 }
@@ -36,7 +38,7 @@ protocol HttpGetClient {
 class RemoteAddAccountTests: XCTestCase {
     
     // MARK: - Tests
-    func test_() {
+    func testAddShouldCallHttpClientWithCorrectUrl() {
         let url = URL(string: "http://any.url.com")
         let httpClientSpy = HttpClientSpy()
         guard let url = url else { return }
