@@ -11,10 +11,10 @@ class RemoteAddAccount {
     
     // MARK: - Properties
     private let url: URL
-    private let httpClient: HttpClient
+    private let httpClient: HttpPostClient
     
     // MARK: - Initialize
-    init(url: URL, httpClient: HttpClient) {
+    init(url: URL, httpClient: HttpPostClient) {
         self.url = url
         self.httpClient = httpClient
     }
@@ -25,8 +25,12 @@ class RemoteAddAccount {
     }
 }
 
-protocol HttpClient {
+protocol HttpPostClient {
     func post(url: URL)
+}
+
+protocol HttpGetClient {
+    func get(url: URL)
 }
 
 class RemoteAddAccountTests: XCTestCase {
@@ -42,14 +46,18 @@ class RemoteAddAccountTests: XCTestCase {
     }
     
     // MARK: - Mock Class HttpClient
-    class HttpClientSpy: HttpClient {
-        
+    class HttpClientSpy: HttpPostClient, HttpGetClient {
+      
         // MARK: - Properties
         var url: URL?
         
         // MARK: - Public Methods
         func post(url: URL) {
             self.url = url
+        }
+        
+        func get(url: URL) {
+            
         }
     }
 }
