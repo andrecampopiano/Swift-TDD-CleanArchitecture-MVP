@@ -30,11 +30,6 @@ protocol HttpPostClient {
     func post(url: URL)
 }
 
-// MARK: - HttpGetClient
-protocol HttpGetClient {
-    func get(url: URL)
-}
-
 class RemoteAddAccountTests: XCTestCase {
     
     // MARK: - Tests
@@ -48,7 +43,7 @@ class RemoteAddAccountTests: XCTestCase {
     }
     
     // MARK: - Mock Class HttpClient
-    class HttpClientSpy: HttpPostClient, HttpGetClient {
+    class HttpClientSpy: HttpPostClient {
       
         // MARK: - Properties
         var url: URL?
@@ -56,10 +51,6 @@ class RemoteAddAccountTests: XCTestCase {
         // MARK: - Public Methods
         func post(url: URL) {
             self.url = url
-        }
-        
-        func get(url: URL) {
-            
         }
     }
 }
