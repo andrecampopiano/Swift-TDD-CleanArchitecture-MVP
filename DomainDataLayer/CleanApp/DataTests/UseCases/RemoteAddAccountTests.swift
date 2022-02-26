@@ -32,13 +32,29 @@ class RemoteAddAccountTests: XCTestCase {
         sut.add(addAccountModel: makeAddAccountModel()) { result in
             switch result {
                 case .failure(let error): XCTAssertEqual(error, .unexpected)
-                case .success: XCTFail("Expected error receive \(result) instead")
+                case .success: XCTFail("Expected error received \(result) instead")
             }
             exp.fulfill()
         }
         httpClientSpy.completeWithError(.noConnectivity)
         wait(for: [exp], timeout: 1)
     }
+    
+    func testAddShouldCompleteWithAccountIfClientCompletesWithData() {
+        let (sut, httpClientSpy) = makeSut()
+        let exp = expectation(description: "waiting")
+        let expectedAccount = makeAccountModel()
+        sut.add(addAccountModel: makeAddAccountModel()) { result in
+            switch result {
+                case .failure: XCTFail("Expected error received \(result) instead")
+                case .success(let receivedAccount): XCTAssertEqual(receivedAccount, expectedAccount)
+            }
+            exp.fulfill()
+        }
+        httpClientSpy.completedWithData(expectedAccount.toData()!)
+        wait(for: [exp], timeout: 1)
+    }
+    
 }
 
 extension RemoteAddAccountTests {
@@ -57,6 +73,13 @@ extension RemoteAddAccountTests {
                                passwordConfirmation: "any_password")
     }
     
+    func makeAccountModel() -> AccountModel {
+        return AccountModel(id: "any_id",
+                            name: "any_name",
+                            email: "any_email@gmail.com",
+                            password: "any_password")
+    }
+    
     // MARK: - Mock Class HttpClient
     class HttpClientSpy: HttpPostClient {
       
@@ -64,6 +87,7 @@ extension RemoteAddAccountTests {
         var urls = [URL]()
         var data: Data?
         var completion: HttpPostClientCompletion?
+        
         // MARK: - Public Methods
         func post(to url: URL, with data: Data?, completion: @escaping HttpPostClientCompletion) {
             self.urls.append(url)
@@ -73,6 +97,10 @@ extension RemoteAddAccountTests {
         
         func completeWithError(_ error: HttpError) {
             completion?(.failure(error))
+        }
+        
+        func completedWithData(_ data: Data) {
+            completion?(.success(data))
         }
     }
 }
