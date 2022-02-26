@@ -13,7 +13,7 @@ class RemoteAddAccountTests: XCTestCase {
     
     // MARK: - Tests
     func testAddShouldCallHttpClientWithCorrectUrl() {
-        let url = URL(string: "http://any.url.com")!
+        let url = makeUrl
         let (sut, httpClientSpy) = makeSut(url: url)
         sut.add(addAccountModel: makeAddAccountModel) { _ in }
         XCTAssertEqual(httpClientSpy.urls, [url])
@@ -44,7 +44,7 @@ class RemoteAddAccountTests: XCTestCase {
     func testAddShouldCompleteWithErrorIfClientCompletesWithInvalidData() {
         let (sut, httpClientSpy) = makeSut()
         expect(sut, completeWith: .failure(.unexpected)) {
-            httpClientSpy.completedWithData(Data("invalid_data".utf8))
+            httpClientSpy.completedWithData(makeInvalidData)
         }
     }
     
@@ -65,6 +65,14 @@ extension RemoteAddAccountTests {
                             name: "any_name",
                             email: "any_email@gmail.com",
                             password: "any_password")
+    }
+    
+    var makeInvalidData: Data {
+        return Data("invalid_data".utf8)
+    }
+    
+    var makeUrl: URL {
+        return URL(string: "http://any.url.com")!
     }
     
     // MARK: - Factory Helper Methods
