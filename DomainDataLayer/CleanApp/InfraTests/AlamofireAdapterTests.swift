@@ -17,7 +17,7 @@ class AlamofireAdapter {
     
     func post(to url: URL, with data: Data?) {
         guard let data = data else { return }
-        let json = try? JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? [String: Any]
+        let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any]
         session.request(url, method: .post, parameters: json, encoding: JSONEncoding.default).resume()
     }
 }
