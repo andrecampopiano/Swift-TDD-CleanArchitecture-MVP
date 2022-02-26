@@ -22,7 +22,7 @@ class AlamofireAdapter {
 
 class AlamofireAdapterTests: XCTestCase {
     
-    func test_() {
+    func testPostShouldMakeRequestWithValidUrlAndMethod() {
         let url = makeUrl
         
         let configuration = URLSessionConfiguration.default
