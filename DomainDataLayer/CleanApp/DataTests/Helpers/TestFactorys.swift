@@ -16,6 +16,10 @@ extension XCTestCase {
         return Data("invalid_data".utf8)
     }
     
+    var makeValidData: Data {
+        return Data("{\"name\":\"Andre Luis\"}".utf8)
+    }
+    
     var makeUrl: URL {
         return URL(string: "http://any.url.com")!
     }
