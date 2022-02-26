@@ -70,21 +70,6 @@ extension RemoteAddAccountTests {
                                passwordConfirmation: "any_password")
     }
     
-    var makeAccountModel: AccountModel {
-        return AccountModel(id: "any_id",
-                            name: "any_name",
-                            email: "any_email@gmail.com",
-                            password: "any_password")
-    }
-    
-    var makeInvalidData: Data {
-        return Data("invalid_data".utf8)
-    }
-    
-    var makeUrl: URL {
-        return URL(string: "http://any.url.com")!
-    }
-    
     // MARK: - Factory Helper Methods
     func makeSut(url: URL = URL(string: "http://any.url.com")!,
                  file: StaticString = #file,
@@ -94,14 +79,6 @@ extension RemoteAddAccountTests {
         checkMemoryLeak(for: sut, file: file, line: line)
         checkMemoryLeak(for: httpClientSpy, file: file, line: line)
         return (sut, httpClientSpy)
-    }
-    
-    func checkMemoryLeak(for instance: AnyObject,
-                         file: StaticString = #file,
-                         line: UInt = #line) {
-        addTeardownBlock { [weak instance] in
-            XCTAssertNil(instance, file: file, line: line)
-        }
     }
     
     func expect(_ sut: RemoteAddAccount,
@@ -120,29 +97,5 @@ extension RemoteAddAccountTests {
         }
         action()
         wait(for: [exp], timeout: 1)
-    }
-    
-    // MARK: - Mock Class HttpClient
-    class HttpClientSpy: HttpPostClient {
-      
-        // MARK: - Properties
-        var urls = [URL]()
-        var data: Data?
-        var completion: HttpPostClientCompletion?
-        
-        // MARK: - Public Methods
-        func post(to url: URL, with data: Data?, completion: @escaping HttpPostClientCompletion) {
-            self.urls.append(url)
-            self.data = data
-            self.completion = completion
-        }
-        
-        func completeWithError(_ error: HttpError) {
-            completion?(.failure(error))
-        }
-        
-        func completedWithData(_ data: Data) {
-            completion?(.success(data))
-        }
     }
 }
