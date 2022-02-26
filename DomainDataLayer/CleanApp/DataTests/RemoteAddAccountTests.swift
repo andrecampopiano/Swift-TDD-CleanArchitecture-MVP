@@ -37,26 +37,17 @@ class RemoteAddAccountTests: XCTestCase {
     // MARK: - Tests
     func testAddShouldCallHttpClientWithCorrectUrl() {
         let url = URL(string: "http://any.url.com")
-        let httpClientSpy = HttpClientSpy()
         guard let url = url else { return }
+        let httpClientSpy = HttpClientSpy()
         let sut = RemoteAddAccount(url: url, httpClient: httpClientSpy)
-        let addAccountModel = AddAccountModel(name: "any_name",
-                                              email: "any_email@gmail.com",
-                                              password: "any_password",
-                                              passwordConfirmation: "any_password")
-        sut.add(addAccountModel: addAccountModel)
+        sut.add(addAccountModel: makeAddAccountModel())
         XCTAssertEqual(httpClientSpy.url, url)
     }
     
     func testAddShouldCallHttpClientWithCorrectData() {
-        let url = URL(string: "http://any.url.com")
         let httpClientSpy = HttpClientSpy()
-        guard let url = url else { return }
-        let sut = RemoteAddAccount(url: url, httpClient: httpClientSpy)
-        let addAccountModel = AddAccountModel(name: "Andre Luis",
-                                              email: "andre@gmail.com",
-                                              password: "123456",
-                                              passwordConfirmation: "123456")
+        let sut = RemoteAddAccount(url: URL(string: "http://any.url.com")!, httpClient: httpClientSpy)
+        let addAccountModel = makeAddAccountModel()
         sut.add(addAccountModel: addAccountModel)
         let data = try? JSONEncoder().encode(addAccountModel)
         XCTAssertEqual(httpClientSpy.data, data)
@@ -65,6 +56,14 @@ class RemoteAddAccountTests: XCTestCase {
 }
 
 extension RemoteAddAccountTests {
+    
+    // MARK: - Mock Methods 
+    func makeAddAccountModel() -> AddAccountModel {
+        return AddAccountModel(name: "any_name",
+                               email: "any_email@gmail.com",
+                               password: "any_password",
+                               passwordConfirmation: "any_password")
+    }
     
     // MARK: - Mock Class HttpClient
     class HttpClientSpy: HttpPostClient {
