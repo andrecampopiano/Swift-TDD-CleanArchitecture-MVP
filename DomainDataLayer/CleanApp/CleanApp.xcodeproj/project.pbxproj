@@ -12,6 +12,7 @@
 		F316D85127C9B0C20073E658 /* Data.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F316D84927C9B0C10073E658 /* Data.framework */; };
 		F316D85F27C9B1050073E658 /* Domain.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F316D83627C9A1C70073E658 /* Domain.framework */; };
 		F316D86027C9B1050073E658 /* Domain.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F316D83627C9A1C70073E658 /* Domain.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F316D86527C9C0A20073E658 /* RemoteAddAccountTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F316D86427C9C0A20073E658 /* RemoteAddAccountTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		F316D84227C9B03B0073E658 /* AccountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountModel.swift; sourceTree = "<group>"; };
 		F316D84927C9B0C10073E658 /* Data.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Data.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F316D85027C9B0C20073E658 /* DataTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DataTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F316D86427C9C0A20073E658 /* RemoteAddAccountTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteAddAccountTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +122,7 @@
 		F316D85427C9B0C20073E658 /* DataTests */ = {
 			isa = PBXGroup;
 			children = (
+				F316D86427C9C0A20073E658 /* RemoteAddAccountTests.swift */,
 			);
 			path = DataTests;
 			sourceTree = "<group>";
@@ -226,6 +229,7 @@
 					};
 					F316D84F27C9B0C20073E658 = {
 						CreatedOnToolsVersion = 13.1;
+						LastSwiftMigration = 1310;
 					};
 				};
 			};
@@ -294,6 +298,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F316D86527C9C0A20073E658 /* RemoteAddAccountTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -557,6 +562,7 @@
 		F316D85C27C9B0C20073E658 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -572,6 +578,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -579,6 +586,7 @@
 		F316D85D27C9B0C20073E658 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
