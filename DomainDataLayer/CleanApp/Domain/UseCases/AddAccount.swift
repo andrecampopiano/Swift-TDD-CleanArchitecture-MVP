@@ -9,7 +9,7 @@ import Foundation
 
 // MARK: - Typealias
 
-public typealias AccountModelCompletion = ((Result<AccountModel, Error>) -> Void)
+public typealias AccountModelCompletion = ((Result<AccountModel, DomainError>) -> Void)
 
 // MARK: - Protocol
 
