@@ -29,7 +29,6 @@ public final class RemoteAddAccount: AddAccount {
                     completion(.success(model))
                 case .failure: completion(.failure(.unexpected))
             }
-           
         }
     }
 }
