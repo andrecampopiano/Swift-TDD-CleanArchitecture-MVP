@@ -128,9 +128,9 @@
 		F316D84A27C9B0C20073E658 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				F316D87627CA65830073E658 /* Helpers */,
 				F316D86E27C9D9220073E658 /* UseCases */,
 				F316D86F27C9D92B0073E658 /* Http */,
+				F316D87627CA65830073E658 /* Helpers */,
 			);
 			path = Data;
 			sourceTree = "<group>";
