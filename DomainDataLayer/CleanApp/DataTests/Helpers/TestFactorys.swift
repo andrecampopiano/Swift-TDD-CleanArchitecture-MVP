@@ -23,3 +23,6 @@ var makeUrl:  URL {
     return URL(string: "http://any.url.com")!
 }
 
+var makeError: Error {
+    return NSError(domain: "any_error", code: 0)
+}
